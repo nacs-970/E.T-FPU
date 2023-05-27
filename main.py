@@ -1,10 +1,16 @@
 import sqlite3
 import datetime
 import getopt
+import yaml
 from sys import argv,exit
 from mode import *
-db = 'piggy.db'
-table = 'piggy'
+
+with open('config.yml','r') as file:
+    data = yaml.safe_load(file)
+
+db = data['name']
+table = data['table']
+
 con = sqlite3.connect(db) 
 cur = con.cursor()
 cur.execute(f"CREATE TABLE IF NOT EXISTS {table} (type TEXT,date DATE,note TEXT,amount REAL)")
@@ -22,12 +28,14 @@ date = None
 note = None
 mode = None
 search = None
+etable = None
+ebase = None
 
 try:
     opts, args = getopt.getopt(argv[1:],'i:w:d:n:m:s:h',['deposit=','withdraw=','date=','note=','mode=','search=','help'])
 
 except getopt.GetoptError: 
-    print("Error : Unknow agrument")
+    print("Error : Unknow agrument / querry")
     print("Try -h / --help")
     exit(1)
 
@@ -41,7 +49,7 @@ for opt,arg in opts:
         print('-s / --search : Search for specify query')
         print('-h / --help : Call for help')
         exit(0)
-    elif opt in ('-i','--deposit'):
+    elif opt in ('-i ','--deposit'):
         deposit = arg
     elif opt in ('-w','--withdraw'):
         withdraw = arg
@@ -93,8 +101,9 @@ if mode is not None:
         menu_m(argv[3])
     elif mode == 'search':
         menu_s()
+        print(" Search Result :")
         for sea in sear_r:
-            print(f"{sea[0]} {sea[1]} {sea[2]} {sea[3]}")
+            print(f" {sea[0]} {sea[1]} {sea[2]} {sea[3]}")
     else:
         print("Error : Unknow mode")
 else:

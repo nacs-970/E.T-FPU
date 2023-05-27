@@ -1,7 +1,12 @@
 import sqlite3
+import yaml
 
-db = 'piggy.db'
-table = 'piggy'
+with open('config.yml','r') as file:
+    data = yaml.safe_load(file)
+
+db = data['name']
+table = data['table']
+
 name = 'E.T - FPU'
 con = sqlite3.connect(db) 
 cur = con.cursor()
