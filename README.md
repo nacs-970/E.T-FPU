@@ -1,5 +1,6 @@
 ### E.T.-FPU
 Expenses tracker for personal use, and this is cs50 final project
+![gif](https://github.com/nacs-970/E.T-FPU/blob/main/gif/demo.gif)
 
 #### Requirement :
   - sqlite3 
