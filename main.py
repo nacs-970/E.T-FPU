@@ -28,8 +28,6 @@ date = None
 note = None
 mode = None
 search = None
-etable = None
-ebase = None
 
 try:
     opts, args = getopt.getopt(argv[1:],'i:w:d:n:m:s:h',['deposit=','withdraw=','date=','note=','mode=','search=','help'])
@@ -49,7 +47,7 @@ for opt,arg in opts:
         print('-s / --search : Search for specify query')
         print('-h / --help : Call for help')
         exit(0)
-    elif opt in ('-i ','--deposit'):
+    elif opt in ('-i','--deposit'):
         deposit = arg
     elif opt in ('-w','--withdraw'):
         withdraw = arg
